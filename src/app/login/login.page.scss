@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+
+.main-content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(#4b27ff, #4B27FF8B), url("background.jpg") no-repeat top center;
+  background-size: 100% 100%;
+  opacity: 80%;
+}
+
+.signup-button {
+  height: 42px;
+  --color: #4B27FF8B;
+  --background: white;
+  --border-radius: 50px;
+}
+
+.signin-button {
+  margin-top: 35%;
+  height: 42px;
+  --border-radius: 50px;
+}
