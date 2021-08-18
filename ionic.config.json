@@ -1,0 +1,7 @@
+{
+  "name": "TooManyClass",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
