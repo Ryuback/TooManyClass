@@ -22,10 +22,9 @@ export class AppComponent {
 
   inicializateApp() {
         this.platform.ready().then(() => {
-          this.statusBar.overlaysWebView(true);
+          this.statusBar.show();
           this.splashScreen.hide();
-        })
+        });
     }
-
 
 }

@@ -1,0 +1,39 @@
+.main-content {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(#4b27ff, #4B27FF8B);
+  //background-size: 100% 100%;
+  opacity: 50%;
+}
+
+ion-item {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  --background: transparent;
+  --color: black;
+}
+
+ion-icon {
+  position: sticky;
+  top: 2px;
+}
+
+.signin-button {
+  margin-top: 10%;
+  height: 42px;
+  --border-radius: 50px;
+  --background: var(--ion-color-tertiary-tint);
+}
+
+.google-divider {
+  background-color: white;
+  width: 70%;
+  height: 2px;
+  border-radius: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  opacity: 50%;
+}
