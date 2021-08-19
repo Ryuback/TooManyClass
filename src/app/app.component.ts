@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Platform } from '@ionic/angular';
+import { isPlatform, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,6 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  routerActivate: boolean = false;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -20,13 +19,13 @@ export class AppComponent {
     this.inicializateApp();
     this.router.navigateByUrl('splash');
   }
-  
+
   inicializateApp() {
         this.platform.ready().then(() => {
-          this.statusBar.styleDefault();
+          this.statusBar.overlaysWebView(true);
           this.splashScreen.hide();
         })
     }
-  
-  
+
+
 }
