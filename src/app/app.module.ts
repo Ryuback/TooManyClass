@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { firebaseConfig } from '../environments/environment.prod';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { firebaseConfig } from '../environments/environment.prod';
     GooglePlus,
     NativePageTransitions,
     SplashScreen,
-    StatusBar
+    StatusBar,
+    FirebaseAuthentication
   ],
   bootstrap: [AppComponent]
 })

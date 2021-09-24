@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-
-// import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
 @Component({
   selector: 'app-signup',
@@ -12,20 +11,22 @@ export class SignupPage implements OnInit {
 
   res: string;
 
-  constructor(private google: GooglePlus) { }
+  constructor(private google: GooglePlus,
+              private firebaseAuthentication: FirebaseAuthentication) { }
 
   ngOnInit() {
   }
 
-  loginGoogle() {
+  async loginGoogle() {
     // TODO: CRIAR SERVICE
-    this.google.login({}).then(res => {
-      this.res = res;
-      console.log(res);
-    })
-      .catch(err => {
-        this.res = err;
-        console.log(err);
-      });
+    const googleLogin = await this.google.login({
+      scopes: '',
+      webClientId: '527216771428-se0reto5ljlapjk0935loat01mtkd2d2.apps.googleusercontent.com',
+      offline: true
+    });
+
+    this.firebaseAuthentication.signInWithGoogle(googleLogin.idToken, googleLogin.accessToken).then(() => {
+      console.log('Firebase logged in with Google');
+    });
   }
 }
