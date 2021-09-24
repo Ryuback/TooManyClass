@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+
+// import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-signup',
@@ -11,15 +12,20 @@ export class SignupPage implements OnInit {
 
   res: string;
 
-  constructor(private angularFireAuth: AngularFireAuth,
-              private google: GooglePlus) { }
+  constructor(private google: GooglePlus) { }
 
   ngOnInit() {
   }
 
   loginGoogle() {
     // TODO: CRIAR SERVICE
-    this.google.login({}).then(res => this.res = res)
-      .catch(err => this.res = err);
+    this.google.login({}).then(res => {
+      this.res = res;
+      console.log(res);
+    })
+      .catch(err => {
+        this.res = err;
+        console.log(err);
+      });
   }
 }

@@ -10,16 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { firebaseConfig } from '../environments/environment.prod';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [[BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule],
+  imports: [[BrowserModule, IonicModule.forRoot(), AppRoutingModule]],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     GooglePlus,
