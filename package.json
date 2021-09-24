@@ -63,7 +63,7 @@
     "cordova-plugin-firebase-authentication": "^5.0.0",
     "cordova-plugin-googleplus": "^8.5.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
-    "cordova-plugin-ionic-webview": "^1.2.1",
+    "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-whitelist": "^1.3.5",
@@ -98,14 +98,14 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.tooManyClass",
         "WEB_APPLICATION_CLIENT_ID": "527216771428-se0reto5ljlapjk0935loat01mtkd2d2.apps.googleusercontent.com"
       },
       "cordova-plugin-firebase-authentication": {
         "ANDROID_FIREBASE_AUTH_VERSION": "21.0.+"
-      }
+      },
+      "cordova-plugin-ionic-webview": {}
     },
     "platforms": [
       "android"

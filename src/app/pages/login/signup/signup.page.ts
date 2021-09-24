@@ -19,7 +19,9 @@ export class SignupPage implements OnInit {
 
   async loginGoogle() {
     this.firebaseService.loginWithGoogle()
-      .then(res => console.log('#SignupPage.firebaseService.loginGoogle', 'SUCCESS'))
+      .then(res => {
+        console.log('#SignupPage.firebaseService.loginGoogle', 'SUCCESS');
+      })
       .catch();
   }
 }
