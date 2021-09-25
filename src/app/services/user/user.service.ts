@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../shared/model/user.model';
+import { Storage } from '@ionic/storage-angular';
 import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  current: User = null;
   // users: User[];
   // private currentSubject$ = new Subject<User>();
   // current$ = this.currentSubject$.asObservable();
 
-  constructor() { }
+  constructor(private storage: Storage) {
+    console.log('#UserService.constructor');
+  }
 
   isAuth(): Observable<boolean> {
     return new Observable<boolean>((observer) => {
@@ -30,17 +31,12 @@ export class UserService {
   }
 
   private getCurrentUser(): Promise<User> {
-    return this.storage.get('users/me');
+    return this.storage.get('user');
   }
 
-  async setCurrentUser(user: User): Promise<User> {
-
-    if (_.isEqual(this.current, user)) {
-      return this.current;
-    }
-    this.current = user;
-    // await this.storage.set('users/me', user);
-
-    //   AuthInterceptor.user = user;
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  setCurrentUser(user: User): Promise<User> {
+    return this.storage.set('user', user);
+    // AuthInterceptor.user = user;
   }
 }

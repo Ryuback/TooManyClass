@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { FirebaseService } from '../../../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +13,10 @@ export class SignupPage implements OnInit {
 
   res: string;
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private firebaseService: FirebaseService,
+              public router: Router) {
+    console.log('#SignupPage.constructor');
+  }
 
   ngOnInit() {
   }
@@ -21,6 +25,7 @@ export class SignupPage implements OnInit {
     this.firebaseService.loginWithGoogle()
       .then(res => {
         console.log('#SignupPage.firebaseService.loginGoogle', 'SUCCESS');
+        this.router.navigateByUrl('dashboard');
       })
       .catch();
   }

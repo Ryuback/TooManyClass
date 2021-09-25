@@ -10,13 +10,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { firebaseConfig } from '../environments/environment.prod';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { Drivers } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [[BrowserModule, IonicModule.forRoot(), AppRoutingModule]],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+      driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
+    })],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     GooglePlus,
