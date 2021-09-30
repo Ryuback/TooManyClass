@@ -2,6 +2,6 @@ export interface User {
   displayName: string;
   email: string;
   givenName: string;
-  imagemURL: string;
+  imageUrl: string;
   expiresIn: number;
 };

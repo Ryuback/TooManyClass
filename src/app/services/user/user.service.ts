@@ -19,18 +19,18 @@ export class UserService {
   isAuth(): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       this.getCurrentUser().then((user) => {
-        observer.next(true);
-        observer.complete();
-      })
-        .catch(err => {
-          console.log(err);
+        if (user) {
+          observer.next(true);
+          observer.complete();
+        } else {
           observer.next(false);
           observer.complete();
-        });
+        }
+      });
     });
   }
 
-  private getCurrentUser(): Promise<User> {
+  getCurrentUser(): Promise<User> {
     return this.storage.get('user');
   }
 

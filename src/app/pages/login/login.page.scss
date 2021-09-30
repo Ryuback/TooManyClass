@@ -2,14 +2,17 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  background: linear-gradient(#4b27ff, #4B27FF8B), url("background.jpg") no-repeat top center;
+  //background-image: url("./background.jpg"), linear-gradient(#f39c12, #f1c40f);;
   background-size: 100% 100%;
+  background-image: linear-gradient(to right, rgba(230, 126, 34, 0.91), rgba(243, 156, 18, 0.89)), url('./background.jpg');
+  background-position: center, right bottom;
+  background-repeat: no-repeat, no-repeat;
   opacity: 80%;
 }
 
 .signup-button {
   height: 42px;
-  --color: #4B27FF8B;
+  --color: rgba(230, 126, 34, 0.91);
   --background: white;
   --border-radius: 50px;
 }

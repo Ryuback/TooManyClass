@@ -2,9 +2,9 @@
   position: fixed;
   height: 100%;
   width: 100%;
-  background: linear-gradient(#4b27ff, #4B27FF8B);
+  background: linear-gradient(to right, rgb(230, 126, 34), rgb(243, 156, 18));
   //background-size: 100% 100%;
-  opacity: 50%;
+  opacity: 80%;
 }
 
 ion-item {
@@ -24,7 +24,8 @@ ion-icon {
   margin-top: 10%;
   height: 42px;
   --border-radius: 50px;
-  --background: var(--ion-color-tertiary-tint);
+  --background: white;
+  --color: rgb(243, 156, 18);
 }
 
 .google-divider {

@@ -60,6 +60,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
+    "com.telerik.plugins.nativepagetransitions": "^0.7.0",
     "cordova-android": "^9.1.0",
     "cordova-plugin-cleartext": "^1.0.0",
     "cordova-plugin-device": "^2.0.2",
@@ -108,7 +109,8 @@
       "cordova-plugin-firebase-authentication": {
         "ANDROID_FIREBASE_AUTH_VERSION": "21.0.+"
       },
-      "cordova-plugin-ionic-webview": {}
+      "cordova-plugin-ionic-webview": {},
+      "com.telerik.plugins.nativepagetransitions": {}
     },
     "platforms": [
       "android"

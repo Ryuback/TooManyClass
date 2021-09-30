@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="dismiss()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <img src="../../assets/icon/school.png" alt="">
+    </ion-row>
+    <h4>Nova classe</h4>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="school-outline"></ion-icon>
+            Nome da Classe
+          </ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-textarea placeholder="Descrição..."></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 5rem">
+      <ion-col>
+        <ion-button expand="full" class="signin-button">
+          <ion-icon name="checkmark-circle-outline" slot="end"></ion-icon>
+          Criar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

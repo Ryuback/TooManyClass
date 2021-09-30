@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
+import { UserService } from '../services/user/user.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { tap } from 'rxjs/operators';
 
+@UntilDestroy()
 @Component({
   selector: 'app-splash',
   templateUrl: './splash.page.html',
@@ -10,11 +14,21 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 export class SplashPage implements OnInit {
 
   constructor(private router: Router,
-              private nativePageTransitions: NativePageTransitions) { }
+              private nativePageTransitions: NativePageTransitions,
+              private userService: UserService) { }
 
   ngOnInit() {
     setTimeout(() => {
-      this.router.navigateByUrl('');
+      this.userService.isAuth().pipe(
+        untilDestroyed(this),
+        tap(r => {
+          if (r) {
+            this.router.navigateByUrl('dashboard');
+          } else {
+            this.router.navigateByUrl('');
+          }
+        })
+      ).subscribe();
     }, 3500);
   }
 
@@ -28,7 +42,7 @@ export class SplashPage implements OnInit {
       fixedPixelsTop: 0,
       fixedPixelsBottom: 60
     };
-    this.nativePageTransitions.fade(options);
+    return this.nativePageTransitions.fade(options);
   }
 
 }

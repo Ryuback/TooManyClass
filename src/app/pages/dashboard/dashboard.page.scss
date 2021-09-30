@@ -1,0 +1,91 @@
+.header {
+  position: relative;
+  height: 4rem;
+}
+
+img {
+  height: 48px;
+  width: 48px;
+  margin: auto;
+}
+
+.main-title {
+  margin-top: 10px;
+  font-family: 'Mitr', sans-serif;
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
+.initial-card {
+  border: 0;
+}
+
+p {
+  font-weight: bold;
+  color: #3498db;
+}
+
+h4 {
+  font-size: 1rem;
+  margin-left: 5px;
+  text-transform: uppercase;
+}
+
+ion-title {
+  color: rgba(13, 13, 13, 0.78);
+  position: absolute;
+  top: -13px;
+}
+
+ion-label {
+  color: rgba(13, 13, 13, 0.78);
+  position: absolute;
+  top: 8px;
+  margin-right: 25px;
+  text-align: center;
+}
+
+
+.shape9 {
+  border-radius: 10px 20px;
+}
+
+.bubble6 {
+  position: relative;
+  width: 95%;
+  height: auto;
+  background: rgb(243, 156, 18, 0.1);
+  border-radius: 5px;
+  padding: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.bubble6-arrow {
+  position: absolute;
+  right: 15px;
+  bottom: -25px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 5px;
+    bottom: 2px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    bottom: 4px;
+    border-left: 21px solid transparent;
+    border-top: 21px solid rgb(243, 156, 18, 0.1);
+  }
+}
+
+.add-link {
+  font-weight: bold;
+  color: #0984e3;
+  text-align: center;
+  margin-top: 2rem;
+}

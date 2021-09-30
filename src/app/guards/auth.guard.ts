@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } fro
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { UserService } from '../services/user/user.service';
-import { tap } from 'rxjs/operators';
 
 @UntilDestroy()
 @Injectable({
@@ -19,6 +18,9 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.userService.isAuth();
+    this.userService.isAuth().pipe(untilDestroyed(this)).subscribe((r) => {
+      this.isAuth = r;
+    });
+    return false;
   }
 }

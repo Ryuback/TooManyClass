@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardPage
+  },
+  {
+    path: 'create-class',
+    loadChildren: () => import('./create-class/create-class.module').then( m => m.CreateClassPageModule)
   }
 ];
 
