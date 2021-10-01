@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ClassPageRoutingModule } from './class-routing.module';
 
 import { ClassPage } from './class.page';
+import { NgMultiavatarModule } from 'ng-multiavatar';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClassPageRoutingModule
+    ClassPageRoutingModule,
+    NgMultiavatarModule
   ],
   declarations: [ClassPage]
 })

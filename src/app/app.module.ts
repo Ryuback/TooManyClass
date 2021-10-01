@@ -14,15 +14,20 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
+import { NgMultiavatarModule } from 'ng-multiavatar';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+  imports: [BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     IonicStorageModule.forRoot({
       name: '__mydb',
       driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
-    })],
+    }),
+    NgMultiavatarModule
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     GooglePlus,
