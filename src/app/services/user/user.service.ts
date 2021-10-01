@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../shared/model/user.model';
 import { Storage } from '@ionic/storage-angular';
 import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class UserService {
   // private currentSubject$ = new Subject<User>();
   // current$ = this.currentSubject$.asObservable();
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage,
+              private router: Router) {
     console.log('#UserService.constructor');
   }
 
@@ -38,5 +40,10 @@ export class UserService {
   setCurrentUser(user: User): Promise<User> {
     return this.storage.set('user', user);
     // AuthInterceptor.user = user;
+  }
+
+  logOut(): void {
+    //TODO: NÃO DEIXAR USAR O BACK BUTTON
+    this.storage.remove('user').then(() => this.router.navigateByUrl(''));
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../shared/model/user.model';
 import { ModalController } from '@ionic/angular';
-import { LoginPage } from '../login/login.page';
 import { CreateClassPage } from './create-class/create-class.page';
 
 @Component({
@@ -36,6 +35,10 @@ export class DashboardPage implements OnInit {
       cssClass: 'my-custom-class'
     });
     return await modal.present();
+  }
+
+  async logOut() {
+    return this.userService.logOut();
   }
 
 }
