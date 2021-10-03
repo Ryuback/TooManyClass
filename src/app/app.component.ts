@@ -24,16 +24,17 @@ export class AppComponent {
     private userService: UserService
   ) {
     this.inicializateApp();
-    this.userService.isAuth().pipe(
-      untilDestroyed(this),
-      tap(r => {
-        if (r) {
-          this.router.navigateByUrl('dashboard');
-        } else {
-          this.router.navigateByUrl('splash');
-        }
-      })
-    ).subscribe();
+    this.router.navigateByUrl('splash');
+    // this.userService.isAuth().pipe(
+    //   untilDestroyed(this),
+    //   tap(r => {
+    //     if (r) {
+    //       this.router.navigateByUrl('dashboard');
+    //     } else {
+    //       this.router.navigateByUrl('splash');
+    //     }
+    //   })
+    // ).subscribe();
   }
 
   inicializateApp() {
