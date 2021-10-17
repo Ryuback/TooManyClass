@@ -15,6 +15,21 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import { NgMultiavatarModule } from 'ng-multiavatar';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyBlNWGRWBgJjoS5QhQMUJlb8a-du97C0gM',
+  authDomain: 'toomanyclass-3ff72.firebaseapp.com',
+  projectId: 'toomanyclass-3ff72',
+  storageBucket: 'tombolas-3ff72.appspot.com',
+  messagingSenderId: '527216771428',
+  appId: '1:527216771428:web:dd0f6b8dbd708e11d43a71'
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,18 +37,25 @@ import { NgMultiavatarModule } from 'ng-multiavatar';
   imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule,
     IonicStorageModule.forRoot({
       name: '__mydb',
       driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
     }),
-    NgMultiavatarModule
+    NgMultiavatarModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule // storage
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
     GooglePlus,
     NativePageTransitions,
     SplashScreen,
     StatusBar,
+    HttpClient,
     FirebaseAuthentication
   ],
   bootstrap: [AppComponent]

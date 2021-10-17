@@ -3,6 +3,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { FirebaseService } from '../../../services/firebase.service';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-signup',
