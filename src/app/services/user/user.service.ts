@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import {FirebaseAuthentication} from '@ionic-native/firebase-authentication/ngx';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { HttpClient } from '@angular/common/http';
+import { api } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,7 @@ export class UserService {
 
   constructor(private storage: Storage,
               private firebaseAuthentication: FirebaseAuthentication,
+              private http: HttpClient,
               private router: Router) {
     console.log('#UserService.constructor');
   }
@@ -39,11 +42,10 @@ export class UserService {
     return this.storage.get('user');
   }
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  setCurrentUser(user: User): Promise<User> {
+
+  async setCurrentUser(user: User): Promise<User> {
     this.firebaseAuthentication.getCurrentUser().then(res => console.log(res));
     return this.storage.set('user', user);
-    // AuthInterceptor.user = user;
   }
 
   logOut(): void {

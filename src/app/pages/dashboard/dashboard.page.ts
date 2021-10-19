@@ -16,24 +16,18 @@ export class DashboardPage implements OnInit {
   bubble = true;
 
   constructor(private userService: UserService,
-              public modalController: ModalController,
-              private http: HttpClient) {
+              public modalController: ModalController) {
     console.log('#DashboardPage.constructor');
   }
 
   ngOnInit() {
     this.load();
-    this.http.get('https://jsonplaceholder.typicode.com/todos/1').toPromise().then(res => console.log(res));
   }
 
   async load() {
     this.user = await this.userService.getCurrentUser();
     console.log(this.user);
     console.log(this.user.imageUrl);
-  }
-
-  teste() {
-    this.http.get<void>('http://localhost:3333/user/me').toPromise().then(res => console.log(res)).catch(err => console.log(err, 'ERROR'));
   }
 
   async addNewClassModal() {

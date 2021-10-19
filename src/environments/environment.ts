@@ -6,6 +6,8 @@ export const environment = {
   production: false
 };
 
+export const api = 'http://192.168.1.137:3333';
+
 export const firebaseConfig = {
   apiKey: 'AIzaSyBlNWGRWBgJjoS5QhQMUJlb8a-du97C0gM',
   authDomain: 'toomanyclass-3ff72.firebaseapp.com',
