@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { FormBuilder } from '@angular/forms';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBlNWGRWBgJjoS5QhQMUJlb8a-du97C0gM',
@@ -56,6 +57,7 @@ const firebaseConfig = {
     SplashScreen,
     StatusBar,
     HttpClient,
+    FormBuilder,
     FirebaseAuthentication
   ],
   bootstrap: [AppComponent]

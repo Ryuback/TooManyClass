@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Class } from '../../../shared/model/class.model';
+import { createEntity } from '../../../shared/model/entity.model';
+import { ClassService } from '../../../services/class/class.service';
+import { api } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-class',
@@ -8,9 +14,19 @@ import { ModalController } from '@ionic/angular';
 })
 export class CreateClassPage implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  private form: FormGroup;
+
+  constructor(private modalController: ModalController,
+              private classService: ClassService,
+              private http: HttpClient,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
+
+    this.form = this.fb.group({
+      name: [null],
+      description: [null],
+    });
   }
 
   dismiss() {
@@ -21,4 +37,13 @@ export class CreateClassPage implements OnInit {
     });
   }
 
+  async submit() {
+    const newClass: Class = {
+      ...createEntity(),
+      ...this.form.value,
+      tasks: []
+    };
+    console.log(newClass);
+    await this.classService.createClass(newClass);
+  }
 }
