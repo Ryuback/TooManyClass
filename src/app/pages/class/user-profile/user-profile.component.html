@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="dismiss()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Perfil do aluno
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile">
+    <ng-multiavatar [seed]="student.name" [hasBackground]="true"></ng-multiavatar>
+    <ion-title> {{ student.name }}</ion-title>
+  </div>
+</ion-content>
