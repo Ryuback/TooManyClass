@@ -1,0 +1,20 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { IonicModule } from '@ionic/angular';
+
+import { ClassConfigPageRoutingModule } from './class-config-routing.module';
+
+import { ClassConfigPage } from './class-config.page';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ClassConfigPageRoutingModule
+  ],
+  declarations: [ClassConfigPage]
+})
+export class ClassConfigPageModule {}

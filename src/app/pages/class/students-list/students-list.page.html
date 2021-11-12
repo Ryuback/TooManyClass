@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{class?.name}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="12">
+      <ion-chip (click)="selectRandomly()">
+        <ion-icon name="shuffle-outline"></ion-icon>
+        <ion-label>Aleatório</ion-label>
+      </ion-chip>
+
+      <ion-chip>
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label>Presença</ion-label>
+      </ion-chip>
+
+      <ion-chip>
+        <ion-icon name="swap-vertical-outline"></ion-icon>
+        <ion-label>Ordenar alunos por</ion-label>
+      </ion-chip>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="3" *ngFor="let student of students">
+      <div [class]="'student-card ' + student.name" (click)="userModal(student)">
+        <ng-multiavatar [seed]="student.name" [hasBackground]="false"></ng-multiavatar>
+        <ion-label> {{ student.name }}</ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
