@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Class } from '../../../shared/model/class.model';
 import { createEntity } from '../../../shared/model/entity.model';
 import { ClassService } from '../../../services/class/class.service';
-import { api } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -25,7 +24,7 @@ export class CreateClassPage implements OnInit {
 
     this.form = this.fb.group({
       name: [null],
-      description: [null],
+      description: [null]
     });
   }
 
@@ -45,5 +44,6 @@ export class CreateClassPage implements OnInit {
     };
     console.log(newClass);
     await this.classService.createClass(newClass);
+    this.dismiss();
   }
 }

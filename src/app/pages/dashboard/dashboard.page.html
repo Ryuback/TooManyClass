@@ -1,5 +1,7 @@
 <ion-content>
-
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-header translucent class="ion-no-border">
     <ion-toolbar>
       <ion-grid>
@@ -36,7 +38,7 @@
 
   <h4 style="margin-top: 1rem; margin-left: 10px">Classes</h4>
 
-  <ion-card routerLink="/class">
+  <ion-card *ngFor="let class of classes" (click)="setActiveClass(class)">
     <ion-card-content>
       <ion-grid>
         <ion-row>
@@ -44,8 +46,8 @@
             <img src="../../assets/icon/graduation-hat.png" alt="">
           </ion-col>
           <ion-col size="9">
-            <ion-title>Título Classe Teste</ion-title>
-            <ion-label style="margin-top: 10px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</ion-label>
+            <ion-title>{{class.name}}</ion-title>
+            <ion-label style="margin-top: 10px">{{class.description}}</ion-label>
           </ion-col>
         </ion-row>
       </ion-grid>

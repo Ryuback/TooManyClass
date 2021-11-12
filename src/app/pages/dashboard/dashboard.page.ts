@@ -3,7 +3,9 @@ import { UserService } from '../../services/user/user.service';
 import { User } from '../../shared/model/user.model';
 import { ModalController } from '@ionic/angular';
 import { CreateClassPage } from './create-class/create-class.page';
-import { HttpClient } from '@angular/common/http';
+import { ClassService } from '../../services/class/class.service';
+import { Class } from '../../shared/model/class.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +17,11 @@ export class DashboardPage implements OnInit {
   user: User;
   bubble = true;
 
+  classes: Class[];
+
   constructor(private userService: UserService,
+              private router: Router,
+              private classService: ClassService,
               public modalController: ModalController) {
     console.log('#DashboardPage.constructor');
   }
@@ -26,8 +32,8 @@ export class DashboardPage implements OnInit {
 
   async load() {
     this.user = await this.userService.getCurrentUser();
-    console.log(this.user);
-    console.log(this.user.imageUrl);
+    this.classes = await this.classService.getAllClasses();
+    console.log('Classes => a ', this.classes);
   }
 
   async addNewClassModal() {
@@ -42,4 +48,13 @@ export class DashboardPage implements OnInit {
     return this.userService.logOut();
   }
 
+  async doRefresh($event: any) {
+    await this.load();
+    $event.target.complete();
+  }
+
+  async setActiveClass(selectedClass: Class) {
+    await this.classService.setClass(selectedClass);
+    return this.router.navigateByUrl('class');
+  }
 }

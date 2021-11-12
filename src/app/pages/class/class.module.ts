@@ -8,6 +8,7 @@ import { ClassPageRoutingModule } from './class-routing.module';
 
 import { ClassPage } from './class.page';
 import { NgMultiavatarModule } from 'ng-multiavatar';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { NgMultiavatarModule } from 'ng-multiavatar';
     ClassPageRoutingModule,
     NgMultiavatarModule
   ],
-  declarations: [ClassPage]
+  declarations: [ClassPage, UserProfileComponent]
 })
 export class ClassPageModule {}
