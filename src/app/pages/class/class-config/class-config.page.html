@@ -1,9 +1,59 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>class-config</ion-title>
+    <ion-title class="ion-text-center">
+      Configuração da classe
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid class="ion-align-items-center">
+    <ion-row>
+      <div class="class-img">
+        <img src="../../assets/icon/graduation-hat.png" alt="">
+      </div>
+    </ion-row>
+
+    <ion-row>
+      <ion-title class="ion-text-center">
+        {{ class?.name }}
+      </ion-title>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <ion-icon name="school-outline"></ion-icon>
+          </ion-label>
+          <ion-input value="{{class?.name}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-textarea placeholder="Descrição..." value="{{class?.description}}"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="showCode = true"
+                    expand="full">
+          Gerar código de convite
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="showCode">
+      <span class="ion-text-center">
+        {{ class?._id }}
+      </span>
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>

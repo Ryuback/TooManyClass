@@ -67,6 +67,7 @@
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
     "com.telerik.plugins.nativepagetransitions": "^0.7.0",
+    "cordova-android": "^9.1.0",
     "cordova-plugin-cleartext": "^1.0.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-firebase-authentication": "^5.0.0",
@@ -118,6 +119,8 @@
       "com.telerik.plugins.nativepagetransitions": {},
       "cordova-plugin-ionic-webview": {}
     },
-    "platforms": []
+    "platforms": [
+      "android"
+    ]
   }
 }

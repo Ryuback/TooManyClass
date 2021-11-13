@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../shared/model/user.model';
-import { ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { CreateClassPage } from './create-class/create-class.page';
 import { ClassService } from '../../services/class/class.service';
 import { Class } from '../../shared/model/class.model';
@@ -22,7 +22,8 @@ export class DashboardPage implements OnInit {
   constructor(private userService: UserService,
               private router: Router,
               private classService: ClassService,
-              public modalController: ModalController) {
+              public modalController: ModalController,
+              public actionSheetController: ActionSheetController) {
     console.log('#DashboardPage.constructor');
   }
 
@@ -32,8 +33,10 @@ export class DashboardPage implements OnInit {
 
   async load() {
     this.user = await this.userService.getCurrentUser();
-    this.classes = await this.classService.getAllClasses();
-    console.log('Classes => a ', this.classes);
+    this.classService.getAllClasses().then(v => {
+      this.classes = v;
+      console.log('Classes => ', this.classes);
+    });
   }
 
   async addNewClassModal() {
@@ -57,4 +60,27 @@ export class DashboardPage implements OnInit {
     await this.classService.setClass(selectedClass);
     return this.router.navigateByUrl('class');
   }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      buttons: [{
+        text: 'Criar uma nova turma',
+        icon: 'add-circle-outline',
+        handler: () => {
+          this.addNewClassModal();
+        }
+      }, {
+        text: 'Entrar em uma turma existente',
+        icon: 'link',
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+
+    const { role } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
 }

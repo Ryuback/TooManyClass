@@ -38,6 +38,10 @@
 
   <h4 style="margin-top: 1rem; margin-left: 10px">Classes</h4>
 
+  <div class="ion-padding custom-skeleton" *ngIf="!classes">
+    <ion-skeleton-text animated style="height: 100px"></ion-skeleton-text>
+  </div>
+
   <ion-card *ngFor="let class of classes" (click)="setActiveClass(class)">
     <ion-card-content>
       <ion-grid>
@@ -54,7 +58,7 @@
     </ion-card-content>
   </ion-card>
 
-  <div class="add-link" (click)="addNewClassModal()">
+  <div class="add-link" (click)="presentActionSheet()">
     <ion-icon name="add-outline"></ion-icon>
     Adicionar nova classe
   </div>
