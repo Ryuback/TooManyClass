@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'create-class',
     loadChildren: () => import('./create-class/create-class.module').then(m => m.CreateClassPageModule)
+  },  {
+    path: 'popover',
+    loadChildren: () => import('./popover/popover.module').then( m => m.PopoverPageModule)
   }
+
 
 ];
 

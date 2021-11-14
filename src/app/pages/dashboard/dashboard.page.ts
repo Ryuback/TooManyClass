@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../shared/model/user.model';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController, PopoverController } from '@ionic/angular';
 import { CreateClassPage } from './create-class/create-class.page';
 import { ClassService } from '../../services/class/class.service';
 import { Class } from '../../shared/model/class.model';
 import { Router } from '@angular/router';
+import { PopoverPage } from './popover/popover.page';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,8 @@ export class DashboardPage implements OnInit {
               private router: Router,
               private classService: ClassService,
               public modalController: ModalController,
-              public actionSheetController: ActionSheetController) {
+              public actionSheetController: ActionSheetController,
+              public popoverController: PopoverController) {
     console.log('#DashboardPage.constructor');
   }
 
@@ -72,8 +74,9 @@ export class DashboardPage implements OnInit {
       }, {
         text: 'Entrar em uma turma existente',
         icon: 'link',
-        handler: () => {
-          console.log('Share clicked');
+        handler: async () => {
+          this.presentPopover();
+          return this.actionSheetController.dismiss();
         }
       }]
     });
@@ -81,6 +84,18 @@ export class DashboardPage implements OnInit {
 
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
+  }
+
+  async presentPopover() {
+    const popover = await this.popoverController.create({
+      component: PopoverPage,
+      cssClass: 'my-custom-class',
+      translucent: true
+    });
+    await popover.present();
+
+    await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role');
   }
 
 }
