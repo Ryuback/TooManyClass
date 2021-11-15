@@ -1,14 +1,17 @@
 <ion-content>
-  <ion-grid style="display: inline-flex">
-    <ion-col size="9">
-      <ion-input placeholder="Insira o código aqui">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-grid style="display: inline-flex">
+      <ion-col size="9">
+        <ion-input placeholder="Insira o código aqui"
+                   formControlName="classCode">
 
-      </ion-input>
-    </ion-col>
-    <ion-col size="3">
-      <ion-button color="success">
-        <ion-icon name="checkmark-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-grid>
+        </ion-input>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="success" type="submit">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-grid>
+  </form>
 </ion-content>

@@ -34,7 +34,7 @@ export class DashboardPage implements OnInit {
   }
 
   async load() {
-    this.user = await this.userService.getCurrentUser();
+    this.user = await this.userService.getCurrentUserDB();
     this.classService.getAllClasses().then(v => {
       this.classes = v;
       console.log('Classes => ', this.classes);
@@ -98,4 +98,9 @@ export class DashboardPage implements OnInit {
     console.log('onDidDismiss resolved with role');
   }
 
+  me() {
+    this.userService.getCurrentUser().then(
+      v => console.log(v)
+    );
+  }
 }

@@ -8,7 +8,7 @@
         <ion-row class="header">
           <ion-col size="2">
             <ion-avatar>
-              <img [src]="user?.imageUrl" class="user">
+              <img [src]="user?.imageUrl" class="user" *ngIf="user?.imageUrl">
             </ion-avatar>
           </ion-col>
           <ion-col size="10">
@@ -47,11 +47,14 @@
       <ion-grid>
         <ion-row>
           <ion-col size="3">
+            <img *ngIf="class.ownerId === user?._id" src="../../assets/icon/graduation-hat.png" alt="">
             <img src="../../assets/icon/graduation-hat.png" alt="">
           </ion-col>
           <ion-col size="9">
-            <ion-title>{{class.name}}</ion-title>
-            <ion-label style="margin-top: 10px">{{class.description}}</ion-label>
+            <!--<ion-title>{{class.name}}</ion-title>-->
+            <!--<ion-label style="margin-top: 10px">{{class.description}}</ion-label>            -->
+            <ion-title>{{class.ownerId}}</ion-title>
+            <ion-label style="margin-top: 10px">{{user?._id}}</ion-label>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -71,7 +74,7 @@
       <ion-fab-button color="light" (click)="logOut()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light">
+      <ion-fab-button color="light" (click)="me()">
         <ion-icon name="person-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light">

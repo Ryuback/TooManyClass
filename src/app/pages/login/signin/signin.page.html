@@ -1,51 +1,53 @@
 <ion-content>
   <div class="main-content"></div>
-  <ion-grid>
-    <ion-col>
-      <div class="ion-text-center" style="margin-top: 100px">
-        <img src="../../../assets/images/logo.svg" height="58" width="58" alt="">
-      </div>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-label position="floating">
-          <ion-icon name="person-outline"></ion-icon>
-          Nome Completo
-        </ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-label position="floating">
-          <ion-icon name="mail-outline"></ion-icon>
-          Email
-        </ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-label position="floating">
-          <ion-icon name="key-outline"></ion-icon>
-          Password
-        </ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-label position="floating">
-          <ion-icon name="key-outline"></ion-icon>
-          Confirm Password
-        </ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-button expand="full" shape="round" class="signin-button">
-        Create Account
-      </ion-button>
-    </ion-col>
-  </ion-grid>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-grid>
+      <ion-col>
+        <div class="ion-text-center" style="margin-top: 100px">
+          <img src="../../../assets/images/logo.svg" height="58" width="58" alt="">
+        </div>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="person-outline"></ion-icon>
+            Nome Completo
+          </ion-label>
+          <ion-input formControlName="fullName"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="key-outline"></ion-icon>
+            Apelido
+          </ion-label>
+          <ion-input formControlName="givenName"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="mail-outline"></ion-icon>
+            Email
+          </ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="key-outline"></ion-icon>
+            Password
+          </ion-label>
+          <ion-input formControlName="passwd" type="password"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-button type="submit" expand="full" shape="round" class="signin-button">
+          Create Account
+        </ion-button>
+      </ion-col>
+    </ion-grid>
+  </form>
 </ion-content>

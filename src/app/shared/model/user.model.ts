@@ -5,4 +5,4 @@ export interface User {
   givenName: string;
   imageUrl: string;
   expiresIn: number;
-};
+}

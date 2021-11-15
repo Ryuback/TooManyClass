@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../shared/model/user.model';
 import { Storage } from '@ionic/storage-angular';
-import * as _ from 'lodash';
 import { Router } from '@angular/router';
-import {FirebaseAuthentication} from '@ionic-native/firebase-authentication/ngx';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { HttpClient } from '@angular/common/http';
 import { api } from '../../../environments/environment';
 
@@ -42,6 +40,9 @@ export class UserService {
     return this.storage.get('user');
   }
 
+  getCurrentUserDB(): Promise<User> {
+    return this.http.get<User>(`${api}/user/me`).toPromise();
+  }
 
   async setCurrentUser(user: User): Promise<User> {
     this.firebaseAuthentication.getCurrentUser().then(res => console.log(res));
