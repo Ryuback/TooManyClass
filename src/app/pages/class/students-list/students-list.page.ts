@@ -3,10 +3,7 @@ import { Class } from '../../../shared/model/class.model';
 import { AnimationController, ModalController } from '@ionic/angular';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { Storage } from '@ionic/storage-angular';
-
-interface Student {
-  name: string;
-}
+import { Collaboration } from '../../../shared/model/collaboration.model';
 
 @Component({
   selector: 'app-students-list',
@@ -16,7 +13,7 @@ interface Student {
 export class StudentsListPage implements OnInit {
 
   class: Class;
-  students: Student[] = [];
+  students: Collaboration[] = [];
 
   constructor(private animationCtrl: AnimationController,
               public modalController: ModalController,
@@ -26,9 +23,7 @@ export class StudentsListPage implements OnInit {
   async ngOnInit() {
     this.class = await this.storage.get('activeClass');
     console.log(this.class);
-    this.students = [{ name: 'A' }, { name: 'B' },
-      { name: 'C' }, { name: 'D' }, { name: 'E' },
-      { name: 'F' }, { name: 'G' }, { name: 'H' }, { name: 'I' }];
+    this.students = this.class.collaborations;
     this.cdr.detectChanges();
   }
 
@@ -36,7 +31,7 @@ export class StudentsListPage implements OnInit {
     const student = this.students[Math.floor(Math.random() * this.students.length)];
     // const student = this.students.find(s => s.name === 'George');
     const animation = this.animationCtrl.create()
-      .addElement(document.querySelector(`.${student.name}`))
+      .addElement(document.querySelector(`.${student.givenName}`))
       .duration(100)
       .iterations(Infinity)
       .fromTo('transform', 'translateX(0px)', 'translateX(2px)');

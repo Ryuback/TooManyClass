@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~12.1.1",
     "@angular/router": "~12.1.1",
     "@ionic-native/core": "^5.36.0",
+    "@ionic-native/firebase": "^5.36.0",
     "@ionic-native/firebase-authentication": "^5.36.0",
     "@ionic-native/google-plus": "^5.36.0",
     "@ionic-native/ionic-webview": "^5.36.0",
@@ -113,11 +114,11 @@
         "WEB_APPLICATION_CLIENT_ID": "527216771428-se0reto5ljlapjk0935loat01mtkd2d2.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "15.0.1"
       },
+      "com.telerik.plugins.nativepagetransitions": {},
+      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-firebase-authentication": {
         "ANDROID_FIREBASE_AUTH_VERSION": "21.0.+"
-      },
-      "com.telerik.plugins.nativepagetransitions": {},
-      "cordova-plugin-ionic-webview": {}
+      }
     },
     "platforms": [
       "android"

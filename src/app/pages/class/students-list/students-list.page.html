@@ -30,9 +30,9 @@
   </ion-row>
   <ion-row>
     <ion-col size="3" *ngFor="let student of students">
-      <div [class]="'student-card ' + student.name" (click)="userModal(student)">
-        <ng-multiavatar [seed]="student.name" [hasBackground]="false"></ng-multiavatar>
-        <ion-label> {{ student.name }}</ion-label>
+      <div [class]="'student-card ' + student.givenName" (click)="userModal(student)">
+        <ng-multiavatar [seed]="student.givenName" [hasBackground]="false"></ng-multiavatar>
+        <ion-label> {{ student.givenName }}</ion-label>
       </div>
     </ion-col>
   </ion-row>

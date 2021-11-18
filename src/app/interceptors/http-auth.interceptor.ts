@@ -9,10 +9,12 @@ export class HttpAuthInterceptor implements HttpInterceptor {
 
   constructor(private firebaseAuthentication: FirebaseAuthentication) {
     console.log('#> HttpAuthTokenInterceptor.constructor');
+
+    console.log(this.firebaseAuthentication.getIdToken(false));
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const idTokenObservable = from(this.firebaseAuthentication.getIdToken(true));
+    const idTokenObservable = from(this.firebaseAuthentication.getIdToken(false));
     return idTokenObservable.pipe(
       take(1),
       map(token => this.addAuthToken(token, req)),
