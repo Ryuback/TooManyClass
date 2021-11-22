@@ -32,6 +32,10 @@
             </ion-label>
             <ion-badge slot="end">{{ quality.count }}</ion-badge>
           </ion-item>
+          <div class="skill" *ngIf="quality.name === 'helpingOthers'"> Ajuda os demais</div>
+          <div class="skill" *ngIf="quality.name === 'onTask'"> Faz atividades</div>
+          <div class="skill" *ngIf="quality.name === 'participating'"> Participativo</div>
+          <div class="skill" *ngIf="quality.name === 'teamWork'"> Trabalha em grupo</div>
         </ion-list>
       </ion-col>
     </ion-row>

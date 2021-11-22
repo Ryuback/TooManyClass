@@ -16,6 +16,8 @@ ion-badge {
   right: 25px;
 }
 
-//:host ::ng-deep ion-item .item-native {
-//  border-color: white !important;
-//}
+.skill {
+  font-size: 0.7rem;
+  overflow-wrap: break-word;
+  text-align: center;
+}
