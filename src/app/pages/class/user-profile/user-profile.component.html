@@ -12,6 +12,28 @@
 <ion-content>
   <div class="profile">
     <ng-multiavatar [seed]="student.givenName" [hasBackground]="true"></ng-multiavatar>
-    <ion-title> {{ student.givenName }}</ion-title>
+    <ion-title> {{ student.fullName }}</ion-title>
   </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let quality of student.qualities" size="4">
+        <ion-list lines="none">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <img *ngIf="quality.name === 'helpingOthers'" src="../../../../assets/icon/heart-svgrepo-com.svg" alt=""
+                   style="max-width: 60%">
+              <img *ngIf="quality.name === 'onTask'" src="../../../../assets/icon/like-svgrepo-com.svg" alt=""
+                   style="max-width: 60%">
+              <img *ngIf="quality.name === 'participating'" src="../../../../assets/icon/flash-svgrepo-com.svg" alt=""
+                   style="max-width: 60%">
+              <img *ngIf="quality.name === 'teamWork'" src="../../../../assets/icon/teamwork-svgrepo-com.svg" alt=""
+                   style="max-width: 60%">
+            </ion-label>
+            <ion-badge slot="end">{{ quality.count }}</ion-badge>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

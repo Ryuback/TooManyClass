@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Collaboration } from '../../../shared/model/collaboration.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,11 +9,12 @@ import { ModalController } from '@ionic/angular';
 })
 export class UserProfileComponent implements OnInit {
 
-  @Input() student;
+  @Input() student: Collaboration;
 
   constructor(public modalController: ModalController) { }
 
   ngOnInit(): void {
+    console.log(this.student);
   }
 
   dismiss() {
