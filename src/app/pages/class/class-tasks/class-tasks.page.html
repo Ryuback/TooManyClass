@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>class-tasks</ion-title>
+    <ion-title class="ion-text-center">Trabalhos e Exercícios</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-card *ngFor="let task of tasks" (click)="openTask(task)">
+    <ion-card-header style="padding:  5px">
+      <ion-grid class="ion-align-items-stretch">
+        <ion-row>
+          <ion-col size="11">
+            <ion-card-title>{{ task.title }}</ion-card-title>
+          </ion-col>
+          <ion-col size="1" class="ion-align-items-end">
+            <ion-icon name="copy"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ task.description }}
+    </ion-card-content>
+  </ion-card>
+
+  <div class="add-link">
+    <ion-icon name="add-outline"></ion-icon>
+    Adicionar nova tarefa
+  </div>
 
 </ion-content>

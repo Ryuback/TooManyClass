@@ -1,0 +1,68 @@
+<ion-content>
+
+  <ion-grid style="padding: 15px">
+    <ion-row style="align-content: space-between">
+      <ion-col>
+        <ion-icon name="close" (click)="close()"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-end">
+        <ion-icon name="trash" (click)="removeAlert()" style="color: var(--ion-color-danger)"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-bottom">
+      <ion-col>
+        <ion-title class="ion-text-center">{{ task.title }}</ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-bottom">
+      <ion-col>
+        <ion-text>{{ task.description }}</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-bottom">
+      <ion-col>
+        <ion-title style="font-size: initial">Comentários</ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header style="display: inline-flex">
+            <ng-multiavatar></ng-multiavatar>
+            <ion-card-subtitle style="margin-left: 20px">Yago Vinícius Ferreira de Souza</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            Keep close to Nature's heart... and break clear away, once in awhile,
+            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header style="display: inline-flex">
+            <ng-multiavatar></ng-multiavatar>
+            <ion-card-subtitle style="margin-left: 20px">Yago Vinícius Ferreira de Souza</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            Keep close to Nature's heart... and break clear away, once in awhile,
+            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+          </ion-card-content>
+
+          <ion-card-content>
+            AAAAAAAAAAAAAAA
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

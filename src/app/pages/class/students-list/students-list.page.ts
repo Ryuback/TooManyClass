@@ -4,6 +4,7 @@ import { AnimationController, ModalController } from '@ionic/angular';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { Storage } from '@ionic/storage-angular';
 import { Collaboration } from '../../../shared/model/collaboration.model';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-students-list',
@@ -14,13 +15,16 @@ export class StudentsListPage implements OnInit {
 
   class: Class;
   students: Collaboration[] = [];
+  isStudent: boolean;
 
   constructor(private animationCtrl: AnimationController,
               public modalController: ModalController,
+              private userService: UserService,
               private storage: Storage,
               private cdr: ChangeDetectorRef) { }
 
   async ngOnInit() {
+    this.isStudent = await this.userService.isStudent();
     this.class = await this.storage.get('activeClass');
     console.log(this.class);
     this.students = this.class.collaborations;

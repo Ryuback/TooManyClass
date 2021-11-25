@@ -1,0 +1,21 @@
+* {
+  font-family: 'Mitr', sans-serif;
+}
+
+ion-icon {
+  font-size: 1.5rem;
+}
+
+ion-title {
+  font-weight: 600;
+  padding: 5px;
+}
+
+ion-card {
+  margin: 0;
+}
+
+:host ::ng-deep ng-multiavatar {
+  display: block;
+  width: 2.7rem;
+}

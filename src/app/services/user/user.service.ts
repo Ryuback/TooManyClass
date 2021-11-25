@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { HttpClient } from '@angular/common/http';
 import { api } from '../../../environments/environment';
+import { Class } from '../../shared/model/class.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,12 @@ export class UserService {
   logOut(): void {
     //TODO: NÃO DEIXAR USAR O BACK BUTTON
     this.storage.remove('user').then(() => this.router.navigateByUrl(''));
+  }
+
+  async isStudent(): Promise<boolean> {
+    const classInfo: Class = await this.storage.get('activeClass');
+    const user: User = await this.getCurrentUserDB();
+    // eslint-disable-next-line no-underscore-dangle
+    return !(classInfo.ownerId === user._id);
   }
 }

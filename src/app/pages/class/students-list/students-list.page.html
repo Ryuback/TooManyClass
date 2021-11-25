@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-grid fixed>
-  <ion-row>
+  <ion-row *ngIf="!isStudent">
     <ion-col size="12">
       <ion-chip (click)="selectRandomly()">
         <ion-icon name="shuffle-outline"></ion-icon>
