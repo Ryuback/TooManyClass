@@ -1,0 +1,22 @@
+<ion-content>
+
+  <form [formGroup]="form" (submit)="submit()">
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="bookmark-outline"></ion-icon>
+        Título
+      </ion-label>
+      <ion-input formControlName="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea placeholder="Descrição..." formControlName="description"></ion-textarea>
+    </ion-item>
+
+    <ion-button type="submit" expand="full" class="signin-button">
+      <ion-icon name="checkmark-circle-outline" slot="end"></ion-icon>
+      Criar
+    </ion-button>
+  </form>
+
+</ion-content>
