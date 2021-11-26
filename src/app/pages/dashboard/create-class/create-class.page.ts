@@ -21,7 +21,6 @@ export class CreateClassPage implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit() {
-
     this.form = this.fb.group({
       name: [null],
       description: [null]

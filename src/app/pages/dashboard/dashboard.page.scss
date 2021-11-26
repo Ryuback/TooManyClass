@@ -90,3 +90,9 @@ ion-label {
   text-align: center;
   margin-top: 2rem;
 }
+
+:host ::ng-deep ng-multiavatar .multiavatar-svg {
+  height: 48px;
+  width: 48px;
+  margin: auto;
+}

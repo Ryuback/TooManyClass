@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { FirebaseService } from '../../../services/firebase.service';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -13,13 +11,19 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class SignupPage implements OnInit {
 
   res: string;
+  form: FormGroup;
 
-  constructor(private firebaseService: FirebaseService,
+  constructor(private fb: FormBuilder,
+              private firebaseService: FirebaseService,
               public router: Router) {
     console.log('#SignupPage.constructor');
   }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      email: [null, Validators.email],
+      passwd: [null, Validators.required]
+    });
   }
 
   async loginGoogle() {
@@ -29,5 +33,13 @@ export class SignupPage implements OnInit {
         this.router.navigateByUrl('dashboard');
       })
       .catch();
+  }
+
+  async submit() {
+    if (this.form.valid) {
+      this.firebaseService.login(this.form.value.email, this.form.value.passwd).then(() => {
+        this.router.navigateByUrl('dashboard');
+      });
+    }
   }
 }

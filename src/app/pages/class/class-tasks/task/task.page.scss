@@ -19,3 +19,7 @@ ion-card {
   display: block;
   width: 2.7rem;
 }
+
+:host ::ng-deep .enabled {
+  color: #2C9FD9;
+}

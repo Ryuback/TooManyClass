@@ -9,6 +9,8 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class ClassService {
 
+  activeClass?: Class;
+
   constructor(private storage: Storage,
               private http: HttpClient) {
     console.log('#ClassService.constructor');
@@ -23,6 +25,7 @@ export class ClassService {
   }
 
   setClass(activeClass: Class) {
+    this.activeClass = activeClass;
     return this.storage.set('activeClass', activeClass);
   }
 

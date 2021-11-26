@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Class } from '../../../shared/model/class.model';
 import { AnimationController, ModalController } from '@ionic/angular';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
@@ -11,7 +11,7 @@ import { UserService } from '../../../services/user/user.service';
   templateUrl: './students-list.page.html',
   styleUrls: ['./students-list.page.scss']
 })
-export class StudentsListPage implements OnInit {
+export class StudentsListPage {
 
   class: Class;
   students: Collaboration[] = [];
@@ -23,7 +23,7 @@ export class StudentsListPage implements OnInit {
               private storage: Storage,
               private cdr: ChangeDetectorRef) { }
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
     this.isStudent = await this.userService.isStudent();
     this.class = await this.storage.get('activeClass');
     console.log(this.class);

@@ -28,3 +28,7 @@
 ion-back-button {
   display: block;
 }
+
+.popover_setting .popover-content {
+  --min-width: 300px !important;
+}

@@ -5,7 +5,7 @@
       <ion-col>
         <ion-icon name="close" (click)="close()"></ion-icon>
       </ion-col>
-      <ion-col class="ion-text-end">
+      <ion-col class="ion-text-end" *ngIf="!isStudent">
         <ion-icon name="trash" (click)="removeAlert()" style="color: var(--ion-color-danger)"></ion-icon>
       </ion-col>
     </ion-row>
@@ -28,37 +28,16 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row *ngFor="let comment of task.comments">
       <ion-col>
         <ion-card>
           <ion-card-header style="display: inline-flex">
-            <ng-multiavatar></ng-multiavatar>
-            <ion-card-subtitle style="margin-left: 20px">Yago Vinícius Ferreira de Souza</ion-card-subtitle>
+            <ng-multiavatar [seed]="comment.userGivenName"></ng-multiavatar>
+            <ion-card-subtitle style="margin-left: 20px">{{comment.userFullName}}</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-card>
-          <ion-card-header style="display: inline-flex">
-            <ng-multiavatar></ng-multiavatar>
-            <ion-card-subtitle style="margin-left: 20px">Yago Vinícius Ferreira de Souza</ion-card-subtitle>
-          </ion-card-header>
-
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
-          </ion-card-content>
-
-          <ion-card-content>
-            AAAAAAAAAAAAAAA
+            {{ comment.comment }}
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -66,3 +45,17 @@
   </ion-grid>
 
 </ion-content>
+
+<form [formGroup]="form">
+  <ion-footer>
+    <ion-toolbar>
+      <ion-item>
+        <ion-input placeholder="Faça um comentário..."
+                   formControlName="comment"></ion-input>
+        <ion-icon name="paper-plane"
+                  [class.enabled]="form.value.comment?.length > 0"
+                  (click)="submit()"></ion-icon>
+      </ion-item>
+    </ion-toolbar>
+  </ion-footer>
+</form>

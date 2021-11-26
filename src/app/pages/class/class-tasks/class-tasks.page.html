@@ -21,11 +21,12 @@
     </ion-card-header>
 
     <ion-card-content>
-      {{ task.description }}
+      {{ task.description | slice:0: 255 }}
+      <span *ngIf="task.description && task.description.length > 255">...</span>
     </ion-card-content>
   </ion-card>
 
-  <div class="add-link">
+  <div class="add-link" *ngIf="!isStudent" (click)="presentPopover()">
     <ion-icon name="add-outline"></ion-icon>
     Adicionar nova tarefa
   </div>

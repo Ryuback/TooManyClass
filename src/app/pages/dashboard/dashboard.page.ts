@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../shared/model/user.model';
 import { ActionSheetController, ModalController, PopoverController } from '@ionic/angular';
@@ -11,9 +11,10 @@ import { PopoverPage } from './popover/popover.page';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss']
+  styleUrls: ['./dashboard.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage {
 
   user: User;
   bubble = true;
@@ -23,22 +24,27 @@ export class DashboardPage implements OnInit {
   constructor(private userService: UserService,
               private router: Router,
               private classService: ClassService,
+              private cdr: ChangeDetectorRef,
               public modalController: ModalController,
               public actionSheetController: ActionSheetController,
               public popoverController: PopoverController) {
     console.log('#DashboardPage.constructor');
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.load();
   }
 
   async load() {
     this.user = await this.userService.getCurrentUserDB();
+    this.cdr.detectChanges();
+    this.cdr.detectChanges();
     this.classService.getAllClasses().then(v => {
       this.classes = v;
       console.log('Classes => ', this.classes);
+      this.cdr.detectChanges();
     });
+    this.cdr.detectChanges();
   }
 
   async addNewClassModal() {

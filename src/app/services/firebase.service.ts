@@ -33,7 +33,7 @@ export class FirebaseService {
                  fullName: string,
                  givenName: string): Promise<any> {
     await this.firebaseAuthentication.createUserWithEmailAndPassword(email, password);
-    await this.login(email, password);
+    await this.firebaseAuthentication.signInWithEmailAndPassword(email, password);
     await this.http.post<void>(`${api}/user/afterRegisterWithEmail`,
       {
         fullName,
@@ -44,7 +44,9 @@ export class FirebaseService {
   }
 
   async login(email: string, password: string): Promise<any> {
-    return this.firebaseAuthentication.signInWithEmailAndPassword(email, password);
+    const a = await this.firebaseAuthentication.signInWithEmailAndPassword(email, password);
+    const user = await this.http.get<User>(`${api}/user/me`).toPromise();
+    return this.userService.setCurrentUser(user);
   }
 
 }

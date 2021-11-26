@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { Storage } from '@ionic/storage-angular';
@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: ['./class.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClassPage implements OnInit {
+export class ClassPage {
 
   isStudent: boolean;
 
@@ -19,7 +19,7 @@ export class ClassPage implements OnInit {
               private router: Router
   ) {}
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
     this.isStudent = await this.userService.isStudent();
     await this.router.navigate(['students-list'], { relativeTo: this.route });
   }

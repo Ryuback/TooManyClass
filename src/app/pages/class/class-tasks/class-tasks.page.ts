@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { TaskPage } from './task/task.page';
+import { UserService } from '../../../services/user/user.service';
+import { NewTaskPage } from './new-task/new-task.page';
+import { ClassService } from '../../../services/class/class.service';
 
 interface Task {
   title: string;
@@ -10,32 +13,24 @@ interface Task {
 @Component({
   selector: 'app-class-tasks',
   templateUrl: './class-tasks.page.html',
-  styleUrls: ['./class-tasks.page.scss']
+  styleUrls: ['./class-tasks.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClassTasksPage implements OnInit {
+export class ClassTasksPage {
 
-  tasks: Task[] = [
-    {
-      title: 'Teste1',
-      description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.'
-    },
-    {
-      title: 'Teste2',
-      description: 'Descrição 2'
-    },
-    {
-      title: 'Teste3',
-      description: 'Descrição 3'
-    },
-    {
-      title: 'Teste4',
-      description: 'Descrição 4'
-    }
-  ];
+  tasks: Task[];
+  isStudent = true;
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController,
+              private popoverController: PopoverController,
+              private classService: ClassService,
+              private cdr: ChangeDetectorRef,
+              private userService: UserService) { }
 
-  ngOnInit() {
+  async ionViewWillEnter() {
+    this.tasks = this.classService.activeClass.tasks;
+    this.isStudent = await this.userService.isStudent();
+    this.cdr.detectChanges();
   }
 
   async openTask(task: Task) {
@@ -46,6 +41,24 @@ export class ClassTasksPage implements OnInit {
         task
       }
     });
-    return await modal.present();
+    await modal.present();
+    await modal.onDidDismiss();
+
+    this.tasks = this.classService.activeClass.tasks;
+    this.cdr.detectChanges();
+  }
+
+  async presentPopover() {
+    const popover = await this.popoverController.create({
+      component: NewTaskPage,
+      cssClass: 'popover_setting',
+      translucent: true
+    });
+    await popover.present();
+
+    await popover.onDidDismiss();
+
+    this.tasks = this.classService.activeClass.tasks;
+    this.cdr.detectChanges();
   }
 }
