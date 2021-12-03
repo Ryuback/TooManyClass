@@ -1,0 +1,7 @@
+ion-icon {
+  font-size: 1.5rem;
+}
+
+:host ::ng-deep ng-multiavatar .multiavatar-svg {
+  width: 2.5rem;
+}
