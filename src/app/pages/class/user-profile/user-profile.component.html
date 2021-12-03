@@ -19,7 +19,7 @@
     <ion-row>
       <ion-col *ngFor="let quality of student.qualities" size="4">
         <ion-list lines="none">
-          <ion-item class="ion-text-center">
+          <ion-item class="ion-text-center" (click)="addQuality(quality.name)">
             <ion-label>
               <img *ngIf="quality.name === 'helpingOthers'" src="../../../../assets/icon/heart-svgrepo-com.svg" alt=""
                    style="max-width: 60%">
@@ -41,3 +41,9 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-title>
+    Faltas: {{student.absent}}
+  </ion-title>
+</ion-footer>

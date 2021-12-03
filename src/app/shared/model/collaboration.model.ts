@@ -10,4 +10,5 @@ export interface Collaboration extends Entity {
   givenName: string;
   fullName: string;
   qualities: Quality[];
+  absent: number;
 }

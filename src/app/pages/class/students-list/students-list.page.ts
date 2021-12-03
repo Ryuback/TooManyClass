@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 import { Collaboration } from '../../../shared/model/collaboration.model';
 import { UserService } from '../../../services/user/user.service';
 import { DailyCheckComponent } from './daily-check/daily-check.component';
+import { ClassService } from '../../../services/class/class.service';
 
 @Component({
   selector: 'app-students-list',
@@ -20,6 +21,7 @@ export class StudentsListPage {
 
   constructor(private animationCtrl: AnimationController,
               public modalController: ModalController,
+              private classService: ClassService,
               private userService: UserService,
               private storage: Storage,
               private cdr: ChangeDetectorRef,
@@ -65,7 +67,11 @@ export class StudentsListPage {
         students: this.students
       }
     });
-    return await modal.present();
+    await modal.present();
+    await this.ionViewWillEnter();
+    await modal.onDidDismiss();
+    this.class = this.classService.activeClass;
+    await this.ionViewWillEnter();
   }
 
   async presentActionSheet() {
@@ -86,28 +92,35 @@ export class StudentsListPage {
           text: 'Qualidades',
           handler: () => {
             this.students = this.students.sort((a, b) => {
-              const countA = 0;
-              const countB = 0;
-              a.qualities.forEach(v => v.count + countA);
-              b.qualities.forEach(v => v.count + countB);
-              if (countA < countB) { return -1; }
-              if (countA > countB) { return 1; }
+              let countA = 0;
+              let countB = 0;
+              a.qualities.forEach(v => countA = v.count + countA);
+              b.qualities.forEach(v => countB = v.count + countB);
+              console.log(a.givenName, countA);
+              console.log(b.givenName, countB);
+              if (countA > countB) { return -1; }
+              if (countA < countB) { return 1; }
               return 0;
             });
+            console.log(this.students);
             this.cdr.detectChanges();
           }
         }, {
           text: 'Faltas',
           handler: async () => {
-            // TODO : implementar
-            return this.actionSheetController.dismiss();
+            this.students = this.students.sort((a, b) => {
+              if (a.absent > b.absent) { return -1; }
+              if (a.absent < b.absent) { return 1; }
+              return 0;
+            });
+            console.log(this.students);
+            this.cdr.detectChanges();
           }
         }]
     });
     await actionSheet.present();
 
     const { role } = await actionSheet.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 
 }
