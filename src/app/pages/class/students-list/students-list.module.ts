@@ -8,6 +8,7 @@ import { StudentsListPageRoutingModule } from './students-list-routing.module';
 
 import { StudentsListPage } from './students-list.page';
 import { NgMultiavatarModule } from 'ng-multiavatar';
+import { DailyCheckComponent } from './daily-check/daily-check.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { NgMultiavatarModule } from 'ng-multiavatar';
     StudentsListPageRoutingModule,
     NgMultiavatarModule
   ],
-  declarations: [StudentsListPage]
+  declarations: [StudentsListPage, DailyCheckComponent]
 })
 export class StudentsListPageModule {}
