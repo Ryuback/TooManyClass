@@ -10,7 +10,7 @@
   <ion-grid class="ion-align-items-center">
     <ion-row>
       <div class="class-img">
-        <img src="../../assets/icon/graduation-hat.png" alt="">
+        <img alt="" src="../../assets/icon/graduation-hat.png">
       </div>
     </ion-row>
 
@@ -20,39 +20,75 @@
       </ion-title>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label>
-            <ion-icon name="school-outline"></ion-icon>
-          </ion-label>
-          <ion-input value="{{class?.name}}"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+    <form *ngIf="showUpdateForm"
+          [formGroup]="form">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <ion-icon name="school-outline"></ion-icon>
+            </ion-label>
+            <ion-input formControlName="title"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-textarea placeholder="Descrição..." value="{{class?.description}}"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-textarea formControlName="description"
+                          placeholder="Descrição..."></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
 
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="showCode = true"
-                    expand="full">
-          Gerar código de convite
-        </ion-button>
-      </ion-col>
-    </ion-row>
+    <div *ngIf="!showUpdateForm"
+         class="buttons">
+      <div (click)="showLink(true)"
+           class="action-button ion-activatable ripple-parent link">
+        <ion-icon name="link-outline"></ion-icon>
+        Link
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
 
-    <ion-row *ngIf="showCode">
+      <div (click)="showForm(true)"
+           class="action-button ion-activatable ripple-parent edit">
+        <ion-icon name="hammer-outline"></ion-icon>
+        Editar
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+
+      <div (click)="openExcludeDialog()"
+           class="action-button ion-activatable ripple-parent trash">
+        <ion-icon name="trash-outline"></ion-icon>
+        Excluir
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </div>
+
+    <div *ngIf="showUpdateForm"
+         class="form-buttons">
+      <ion-button (click)="showUpdateForm = false"
+                  color="light">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        Cancelar
+      </ion-button>
+      <ion-button (click)="onSaveClass()"
+                  [disabled]="loading || !form.valid"
+                  color="success">
+        <ion-icon name="checkmark-outline" slot="end"></ion-icon>
+        Salvar
+      </ion-button>
+    </div>
+
+    <div *ngIf="showCode"
+         class="share-text">
+      <!--TODO: COMPARTILHAR-->
       <span class="ion-text-center">
         {{ class?._id }}
       </span>
-    </ion-row>
+    </div>
 
   </ion-grid>
 

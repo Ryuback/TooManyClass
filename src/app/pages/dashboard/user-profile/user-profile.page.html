@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <div class="user-image">
+      <img *ngIf="user?.imageUrl" [src]="user?.imageUrl">
+      <ng-multiavatar *ngIf="!user?.imageUrl" [seed]="user?.givenName"></ng-multiavatar>
+    </div>
+
+    <h5>{{user?.displayName}}</h5>
+  </div>
+</ion-content>

@@ -34,7 +34,7 @@ export class FirebaseService {
                  givenName: string): Promise<any> {
     await this.firebaseAuthentication.createUserWithEmailAndPassword(email, password);
     await this.firebaseAuthentication.signInWithEmailAndPassword(email, password);
-    await this.http.post<void>(`${api}/user/afterRegisterWithEmail`,
+    await this.http.patch<void>(`${api}/user/afterRegisterWithEmail`,
       {
         fullName,
         givenName

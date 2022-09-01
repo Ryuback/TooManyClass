@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../shared/model/user.model';
-import { ActionSheetController, ModalController, PopoverController } from '@ionic/angular';
+import { ActionSheetController, AnimationController, ModalController, PopoverController } from '@ionic/angular';
 import { CreateClassPage } from './create-class/create-class.page';
 import { ClassService } from '../../services/class/class.service';
 import { Class } from '../../shared/model/class.model';
@@ -16,6 +16,9 @@ import { PopoverPage } from './popover/popover.page';
 })
 export class DashboardPage {
 
+  @ViewChild('speechbubble') speechBubble;
+  loading = true;
+
   user: User;
   bubble = true;
 
@@ -27,24 +30,19 @@ export class DashboardPage {
               private cdr: ChangeDetectorRef,
               public modalController: ModalController,
               public actionSheetController: ActionSheetController,
+              private animationCtrl: AnimationController,
               public popoverController: PopoverController) {
     console.log('#DashboardPage.constructor');
   }
 
   ionViewWillEnter() {
-    this.load();
+    this.load().then(() => this.loading = false);
   }
 
   async load() {
     this.user = await this.userService.getCurrentUserDB();
-    this.cdr.detectChanges();
-    this.cdr.detectChanges();
-    this.classService.getAllClasses().then(v => {
-      this.classes = v;
-      console.log('Classes => ', this.classes);
-      this.cdr.detectChanges();
-    });
-    this.cdr.detectChanges();
+    this.classes = await this.classService.getAllClasses();
+    this.cdr.markForCheck();
   }
 
   async addNewClassModal() {
@@ -52,7 +50,10 @@ export class DashboardPage {
       component: CreateClassPage,
       cssClass: 'my-custom-class'
     });
-    return await modal.present();
+    await modal.present();
+    await modal.onWillDismiss();
+    await this.load();
+    return;
   }
 
   async logOut() {
@@ -108,5 +109,23 @@ export class DashboardPage {
     this.userService.getCurrentUser().then(
       v => console.log(v)
     );
+  }
+
+  async openUserProfile() {
+    await this.router.navigateByUrl('user-profile');
+  }
+
+  async closeBubble() {
+    const animation = this.animationCtrl.create()
+      .addElement(document.querySelector('.speechbubble'))
+      .duration(300)
+      .fromTo('transform', 'translateY(0px)', 'translateY(-100px)')
+      .fromTo('opacity', '1', '0')
+      .onFinish(() => {
+        animation.stop();
+        this.bubble = false;
+        this.cdr.markForCheck();
+      });
+    await animation.play();
   }
 }

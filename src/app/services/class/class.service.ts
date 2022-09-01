@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { api } from '../../../environments/environment';
 import { Class } from '../../shared/model/class.model';
 import { Storage } from '@ionic/storage-angular';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,15 @@ export class ClassService {
   setClass(activeClass: Class) {
     this.activeClass = activeClass;
     return this.storage.set('activeClass', activeClass);
+  }
+
+  updateClass(updatedClass: Partial<Class>): Observable<void> {
+    const newClass: Class = {
+      ...this.activeClass,
+      updatedClass
+    } as Class;
+
+    return this.http.patch<void>(`${api}/class/${newClass._id}`, newClass);
   }
 
 }

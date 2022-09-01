@@ -23,3 +23,9 @@ ion-card {
 :host ::ng-deep .enabled {
   color: #2C9FD9;
 }
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}

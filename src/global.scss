@@ -32,3 +32,21 @@ ion-back-button {
 .popover_setting .popover-content {
   --min-width: 300px !important;
 }
+
+@font-face {
+  font-family: proxima-nova-bold;
+  src: url('assets/fonts/FontsFree-Net-Proxima-Nova-Cond-Xbold.otf') format("opentype");;
+}
+
+@font-face {
+  font-family: proxima-nova-semibold;
+  src: url('assets/fonts/FontsFree-Net-FontsFree-Net-Proxima-Nova-Sbold.ttf') format("opentype");;
+}
+
+* {
+  font-family: 'proxima-nova-semibold', "Roboto Light";
+}
+
+ion-popover {
+  --width: 80vw !important;
+}

@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
 import { ClassConfigPageRoutingModule } from './class-config-routing.module';
-
 import { ClassConfigPage } from './class-config.page';
 
 @NgModule({
@@ -13,7 +10,8 @@ import { ClassConfigPage } from './class-config.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ClassConfigPageRoutingModule
+    ClassConfigPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [ClassConfigPage]
 })

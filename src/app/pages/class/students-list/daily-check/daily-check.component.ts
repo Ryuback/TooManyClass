@@ -7,8 +7,7 @@ import { ClassService } from '../../../../services/class/class.service';
 
 interface CheckList {
   userId: string;
-  givenName: string;
-  fullName: string;
+  name: string;
   qualities: Quality[];
   isChecked: boolean;
 }
@@ -28,8 +27,8 @@ export class DailyCheckComponent implements OnInit {
 
   ngOnInit(): void {
     this.students = this.students.sort((a, b) => {
-      if (a.givenName.toLocaleLowerCase() < b.givenName.toLocaleLowerCase()) { return -1; }
-      if (a.givenName.toLocaleLowerCase() > b.givenName.toLocaleLowerCase()) { return 1; }
+      if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) { return -1; }
+      if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) { return 1; }
       return 0;
     });
     this.students.forEach(v => v.isChecked = true);
@@ -51,13 +50,11 @@ export class DailyCheckComponent implements OnInit {
         });
       }
     });
-    console.log(newObject);
     // eslint-disable-next-line no-underscore-dangle
     this.http.post(`${api}/class/dailyCall?classId=${this.classService.activeClass._id}`, newObject).subscribe();
     const allClasses = await this.classService.getAllClasses();
     // eslint-disable-next-line no-underscore-dangle
     await this.classService.setClass(allClasses.filter(c => c._id === this.classService.activeClass._id)[0]);
-    console.log(this.classService.activeClass);
     this.close();
   }
 }

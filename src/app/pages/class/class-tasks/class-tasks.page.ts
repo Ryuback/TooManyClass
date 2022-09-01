@@ -50,9 +50,10 @@ export class ClassTasksPage {
 
   async presentPopover() {
     const popover = await this.popoverController.create({
+      mode: 'ios',
       component: NewTaskPage,
-      cssClass: 'popover_setting',
-      translucent: true
+      translucent: true,
+      animated: true
     });
     await popover.present();
 

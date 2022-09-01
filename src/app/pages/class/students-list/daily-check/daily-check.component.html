@@ -2,7 +2,7 @@
   <ion-grid style="padding: 15px">
     <ion-row style="align-content: space-between">
       <ion-col>
-        <ion-icon name="close" (click)="close()"></ion-icon>
+        <ion-icon (click)="close()" name="close"></ion-icon>
       </ion-col>
     </ion-row>
 
@@ -11,10 +11,10 @@
         <ion-list>
           <ion-item *ngFor="let student of students">
             <ion-label style="display: inline-flex">
-              <ng-multiavatar [seed]="student.givenName"></ng-multiavatar>
-              <span style="margin: auto 10px;">{{student.fullName}}</span>
+              <ng-multiavatar [seed]="student.name"></ng-multiavatar>
+              <span style="margin: auto 10px;">{{student.name ?? student.name}}</span>
             </ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="student.isChecked"></ion-checkbox>
+            <ion-checkbox [(ngModel)]="student.isChecked" slot="end"></ion-checkbox>
           </ion-item>
         </ion-list>
       </ion-col>

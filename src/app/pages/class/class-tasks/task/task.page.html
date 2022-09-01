@@ -3,10 +3,13 @@
   <ion-grid style="padding: 15px">
     <ion-row style="align-content: space-between">
       <ion-col>
-        <ion-icon name="close" (click)="close()"></ion-icon>
+        <ion-icon (click)="close()" name="close"></ion-icon>
       </ion-col>
-      <ion-col class="ion-text-end" *ngIf="!isStudent">
-        <ion-icon name="trash" (click)="removeAlert()" style="color: var(--ion-color-danger)"></ion-icon>
+      <ion-col *ngIf="!isStudent" class="ion-text-end">
+        <div class="buttons">
+          <ion-icon name="create-outline"></ion-icon>
+          <ion-icon (click)="removeAlert()" name="trash" style="color: var(--ion-color-danger)"></ion-icon>
+        </div>
       </ion-col>
     </ion-row>
 
@@ -50,11 +53,11 @@
   <ion-footer>
     <ion-toolbar>
       <ion-item>
-        <ion-input placeholder="Faça um comentário..."
-                   formControlName="comment"></ion-input>
-        <ion-icon name="paper-plane"
+        <ion-input formControlName="comment"
+                   placeholder="Faça um comentário..."></ion-input>
+        <ion-icon (click)="submit()"
                   [class.enabled]="form.value.comment?.length > 0"
-                  (click)="submit()"></ion-icon>
+                  name="paper-plane"></ion-icon>
       </ion-item>
     </ion-toolbar>
   </ion-footer>

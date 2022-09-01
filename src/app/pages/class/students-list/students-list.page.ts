@@ -64,7 +64,7 @@ export class StudentsListPage {
     const modal = await this.modalController.create({
       component: DailyCheckComponent,
       componentProps: {
-        students: this.students
+        students: this.students.map(s => ({ ...s, name: s.fullName || s.givenName }))
       }
     });
     await modal.present();

@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
-
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import { NgMultiavatarModule } from 'ng-multiavatar';
