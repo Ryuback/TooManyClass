@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="close()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Sugestão de alunos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="loading"
+       class="content-spinner">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading">
+
+    <div class="not-found-content">{{items.length === 0 ? 'Nenhum grupo ainda foi sugerido' : ''}}</div>
+
+    <div *ngFor="let item of items; let i = index"
+         class="group">
+      <div class="summary">
+
+        <span>Sugestão {{i + 1}}</span>
+
+        <div>
+          <div class="ion-activatable ripple-parent">
+            <ion-icon (click)="acceptGroup(item)"
+                      name="checkbox-outline"
+                      style="color: var(--ion-color-success)"></ion-icon>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
+
+          <div class="ion-activatable ripple-parent">
+            <ion-icon (click)="removeGroup(item, true)"
+                      name="remove-circle-outline"
+                      style="color: var(--ion-color-danger)"></ion-icon>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let aluno of item.group"
+           class="aluno">
+        <ng-multiavatar [hasBackground]="true" [seed]="aluno.givenName ?? aluno.fullName"></ng-multiavatar>
+        {{aluno.givenName ?? aluno.fullName}}
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>
