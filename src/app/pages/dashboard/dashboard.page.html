@@ -7,8 +7,12 @@
       <div class="header">
         <ion-avatar>
           <ion-skeleton-text *ngIf="!user"></ion-skeleton-text>
-          <img (click)="openUserProfile()" *ngIf="user && user?.imageUrl" [src]="user?.imageUrl">
-          <ng-multiavatar *ngIf="user && !user?.imageUrl" [seed]="user?.givenName"></ng-multiavatar>
+          <img (click)="openUserProfile()"
+               *ngIf="user && user?.imageUrl"
+               [src]="user?.imageUrl">
+          <ng-multiavatar (click)="openUserProfile()"
+                          *ngIf="user && !user?.imageUrl"
+                          [seed]="user?.givenName"></ng-multiavatar>
         </ion-avatar>
         <div class="title">
           <ion-card-title class="ion-text-center main-title">TooManyClass</ion-card-title>
@@ -23,7 +27,7 @@
     <span>
         Bem-vindo ao TooManyClass! <br>
         Ei {{user?.givenName}}, vamos começar? Podemos começar com <br> <br>
-        <ion-button (click)="addNewClassModal()" fill="outline" shape="round">Criar uma nova turma</ion-button>
+        <ion-button (click)="addNewClassModal()" fill="outline" shape="round">Criar uma nova classe</ion-button>
       </span>
   </div>
 

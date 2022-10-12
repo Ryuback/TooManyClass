@@ -30,6 +30,7 @@ export class ClassTasksPage {
   async ionViewWillEnter() {
     this.tasks = this.classService.activeClass.tasks;
     this.isStudent = await this.userService.isStudent();
+    console.log('#IS STUDENT:', this.isStudent);
     this.cdr.detectChanges();
   }
 

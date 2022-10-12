@@ -15,3 +15,12 @@
     filter: drop-shadow(0 0 0.45rem #000000);
   }
 }
+
+:host ::ng-deep {
+  ng-multiavatar .multiavatar-svg {
+    width: 96px;
+    height: 96px;
+    max-width: 96px;
+    margin: auto;
+  }
+}

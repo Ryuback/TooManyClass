@@ -1,16 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { UserService } from '../../../../services/user/user.service';
 import { HttpClient } from '@angular/common/http';
 import { api } from '../../../../../environments/environment';
 import { ClassService } from '../../../../services/class/class.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TaskGroupPage } from './task-group/task-group.page';
+import { NewTaskPage } from '../new-task/new-task.page';
 
 interface Comment {
   _id: string;
   userFullName: string;
   userGivenName: string;
   comment: string;
+  userPhoto: string;
 }
 
 interface Task {
@@ -23,13 +26,12 @@ interface Task {
 @Component({
   selector: 'app-task',
   templateUrl: './task.page.html',
-  styleUrls: ['./task.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./task.page.scss']
 })
 export class TaskPage implements OnInit {
 
   @Input() task: Task;
-  isStudent: boolean;
+  isStudent: boolean = true;
   form: FormGroup;
   comments: Comment[];
 
@@ -39,6 +41,7 @@ export class TaskPage implements OnInit {
               private userService: UserService,
               private cdr: ChangeDetectorRef,
               private http: HttpClient,
+              private popoverController: PopoverController,
               public alertController: AlertController) { }
 
   async ngOnInit() {
@@ -46,7 +49,9 @@ export class TaskPage implements OnInit {
       comment: [null]
     });
     this.isStudent = await this.userService.isStudent();
+    console.log('#IS STUDENT:', this.isStudent);
     this.comments = this.task.comments;
+    this.cdr.markForCheck();
   }
 
   close() {
@@ -103,5 +108,37 @@ export class TaskPage implements OnInit {
         this.cdr.detectChanges();
       }
     });
+  }
+
+  async openGroupList() {
+    const modal = await this.modalController.create({
+      component: TaskGroupPage,
+      componentProps: {
+        task: this.task
+      }
+    });
+    await modal.present();
+    await modal.onDidDismiss();
+
+    this.cdr.detectChanges();
+  }
+
+  async openEditDialog() {
+    const popover = await this.popoverController.create({
+      mode: 'ios',
+      component: NewTaskPage,
+      translucent: true,
+      animated: true,
+      componentProps: {
+        task: this.task
+      }
+    });
+    await popover.present();
+
+    const data = await popover.onDidDismiss();
+    this.task = data.data;
+    console.log(this.task);
+
+    this.cdr.detectChanges();
   }
 }

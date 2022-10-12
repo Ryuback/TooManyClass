@@ -1,6 +1,6 @@
 export interface User {
   _id: string;
-  displayName: string;
+  fullName: string;
   email: string;
   givenName: string;
   imageUrl: string;

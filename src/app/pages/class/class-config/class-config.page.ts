@@ -11,6 +11,7 @@ import { finalize, tap } from 'rxjs/operators';
 import { ConfirmationService } from '../../../services/confirmation/confirmation.service';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 
 @Component({
   selector: 'app-class-config',
@@ -35,6 +36,7 @@ export class ClassConfigPage implements OnInit {
               private loadingCtrl: LoadingController,
               private http: HttpClient,
               private router: Router,
+              private socialSharing: SocialSharing,
               private cdr: ChangeDetectorRef) { }
 
   async ngOnInit() {
@@ -86,6 +88,7 @@ export class ClassConfigPage implements OnInit {
   showLink(value: boolean) {
     this.showUpdateForm = false;
     this.showCode = value;
+    this.shareCode();
   }
 
   showForm(value: boolean) {
@@ -117,6 +120,10 @@ export class ClassConfigPage implements OnInit {
         console.warn('CANCELEI');
       }
     );
+  }
+
+  shareCode() {
+    this.socialSharing.share(this.class._id);
   }
 
 }

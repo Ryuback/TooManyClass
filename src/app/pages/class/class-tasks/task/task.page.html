@@ -5,10 +5,17 @@
       <ion-col>
         <ion-icon (click)="close()" name="close"></ion-icon>
       </ion-col>
-      <ion-col *ngIf="!isStudent" class="ion-text-end">
+      <ion-col class="ion-text-end">
         <div class="buttons">
-          <ion-icon name="create-outline"></ion-icon>
-          <ion-icon (click)="removeAlert()" name="trash" style="color: var(--ion-color-danger)"></ion-icon>
+          <ion-icon (click)="openGroupList()"
+                    name="people-outline"></ion-icon>
+          <ion-icon (click)="openEditDialog()"
+                    *ngIf="!isStudent"
+                    name="create-outline"></ion-icon>
+          <ion-icon (click)="removeAlert()"
+                    *ngIf="!isStudent"
+                    name="trash"
+                    style="color: var(--ion-color-danger)"></ion-icon>
         </div>
       </ion-col>
     </ion-row>
@@ -30,12 +37,13 @@
         <ion-title style="font-size: initial">Comentários</ion-title>
       </ion-col>
     </ion-row>
-
     <ion-row *ngFor="let comment of task.comments">
       <ion-col>
         <ion-card>
           <ion-card-header style="display: inline-flex">
-            <ng-multiavatar [seed]="comment.userGivenName"></ng-multiavatar>
+            <ion-avatar *ngIf="comment.userPhoto"
+                        style="height: 46px;width: 46px;"><img [src]="comment.userPhoto"></ion-avatar>
+            <ng-multiavatar *ngIf="!comment.userPhoto" [seed]="comment.userGivenName"></ng-multiavatar>
             <ion-card-subtitle style="margin-left: 20px">{{comment.userFullName}}</ion-card-subtitle>
           </ion-card-header>
 

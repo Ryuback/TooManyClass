@@ -1,20 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../shared/model/user.model';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.page.html',
-  styleUrls: ['./user-profile.page.scss']
+  styleUrls: ['./user-profile.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserProfilePage implements OnInit {
+export class UserProfilePage {
 
   user: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private cdr: ChangeDetectorRef) { }
 
-  async ngOnInit() {
-    this.user = await this.userService.getCurrentUser();
+  ionViewWillEnter() {
+    this.load().then();
+  }
+
+  async load() {
+    this.user = await this.userService.getCurrentUserDB();
+    console.log(this.user);
+    this.cdr.markForCheck();
   }
 
 }

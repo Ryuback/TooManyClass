@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: TaskPage
+  },  {
+    path: 'task-group',
+    loadChildren: () => import('./task-group/task-group.module').then( m => m.TaskGroupPageModule)
   }
+
 ];
 
 @NgModule({

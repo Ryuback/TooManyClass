@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user/user.service';
-import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { tap } from 'rxjs/operators';
 
+@UntilDestroy()
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -9,7 +11,11 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor() {
+  constructor(private platform: Platform) {
+    this.platform.backButton.pipe(
+      untilDestroyed(this),
+      tap(() => {})
+    ).subscribe();
     console.log('#LoginPage.constructor');
   }
 

@@ -50,3 +50,9 @@ ion-back-button {
 ion-popover {
   --width: 80vw !important;
 }
+
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}

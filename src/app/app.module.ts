@@ -21,6 +21,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { FormBuilder } from '@angular/forms';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBlNWGRWBgJjoS5QhQMUJlb8a-du97C0gM',
@@ -58,7 +59,8 @@ const firebaseConfig = {
     StatusBar,
     HttpClient,
     FormBuilder,
-    FirebaseAuthentication
+    FirebaseAuthentication,
+    SocialSharing
   ],
   bootstrap: [AppComponent]
 })

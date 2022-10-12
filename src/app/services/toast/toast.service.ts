@@ -24,5 +24,8 @@ export class ToastService {
       ]
     } as ToastOptions);
     await toast.present();
+    setTimeout(() => {
+      toast.dismiss();
+    }, 1000);
   }
 }

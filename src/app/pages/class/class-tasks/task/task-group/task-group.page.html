@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="close()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{task.title}} - Grupos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="loading"
+       class="content-spinner">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading">
+
+    <div *ngFor="let item of items; let i = index"
+         class="group">
+      <div class="summary">
+        <span>Grupo {{i + 1}}</span>
+        <ion-icon (click)="removeGroup(item)"
+                  *ngIf="!isStudent"
+                  name="trash"
+                  style="color: var(--ion-color-danger)"></ion-icon>
+      </div>
+      <div *ngFor="let aluno of item.group"
+           class="aluno">
+        <ng-multiavatar [hasBackground]="true" [seed]="aluno.givenName ?? aluno.fullName"></ng-multiavatar>
+        {{aluno.givenName ?? aluno.fullName}}
+      </div>
+
+    </div>
+
+    <div (click)="presentActionSheet()"
+         *ngIf="!isStudent"
+         class="add-link">
+      <ion-icon name="add-outline"></ion-icon>
+      Adicionar grupo
+    </div>
+
+    <div (click)="openCreateGroupModal(true)"
+         *ngIf="isStudent"
+         class="add-link">
+      Sugerir grupo
+    </div>
+  </div>
+</ion-content>
