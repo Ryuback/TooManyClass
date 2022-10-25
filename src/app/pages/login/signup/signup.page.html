@@ -3,21 +3,21 @@
   <ion-grid>
     <ion-col>
       <div class="ion-text-center" style="margin-top: 100px; margin-bottom: 20px">
-        <img src="../../../assets/images/logo.svg" height="58" width="58" alt="">
+        <img alt="" height="58" src="../../../assets/images/logo.svg" width="58">
       </div>
     </ion-col>
     <ion-row class="ion-align-items-center">
-      <ion-col size="12" class="ion-text-center">
+      <ion-col class="ion-text-center" size="12">
         <ion-button (click)="loginGoogle()" class="ion-margin-top" style="margin: auto">
           <ion-icon name="logo-google" style="margin-right: 15px"></ion-icon>
-          Sign up with Google
+          Entrar com google
         </ion-button>
       </ion-col>
     </ion-row>
 
     <ion-item-divider></ion-item-divider>
 
-    <form [formGroup]="form" (submit)="submit()">
+    <form (submit)="submit()" [formGroup]="form">
       <ion-col>
         <ion-item>
           <ion-label position="floating">
@@ -31,14 +31,14 @@
         <ion-item>
           <ion-label position="floating">
             <ion-icon name="key-outline"></ion-icon>
-            Password
+            Senha
           </ion-label>
           <ion-input formControlName="passwd" type="password"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
-        <ion-button expand="full" shape="round" class="signin-button" type="submit">
-          Login
+        <ion-button class="signin-button" expand="full" shape="round" type="submit">
+          Entrar
         </ion-button>
       </ion-col>
     </form>

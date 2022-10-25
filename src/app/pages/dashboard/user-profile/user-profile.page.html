@@ -15,7 +15,13 @@
       <ng-multiavatar *ngIf="user && !user?.imageUrl"
                       [seed]="user?.givenName"></ng-multiavatar>
     </div>
-
+ 
     <h5>{{user?.fullName}}</h5>
+
+    <div class="form">
+      <ion-button (click)="submit()" class="signin-button mt-3" expand="full">
+        Enviar email para redefinir senha
+      </ion-button>
+    </div>
   </div>
 </ion-content>

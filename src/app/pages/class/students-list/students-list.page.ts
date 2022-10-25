@@ -31,7 +31,7 @@ export class StudentsListPage {
     this.isStudent = await this.userService.isStudent();
     this.class = await this.storage.get('activeClass');
     console.log(this.class);
-    this.students = this.class.collaborations;
+    this.students = this.class.collaborations.map(s => ({ ...s, absent: s.absent ? s.absent : 0 }));
     this.cdr.detectChanges();
   }
 

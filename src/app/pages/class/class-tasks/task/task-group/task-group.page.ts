@@ -7,10 +7,10 @@ import { CreateGroupPage } from './create-group/create-group.page';
 import { createGroup, Group } from '../../../../../shared/model/task/task-group';
 import { Storage } from '@ionic/storage-angular';
 import { Collaboration } from '../../../../../shared/model/collaboration.model';
-import { createEntity } from '../../../../../shared/model/entity.model';
 import { ConfirmationService } from '../../../../../services/confirmation/confirmation.service';
 import { api } from '../../../../../../environments/environment';
 import { SuggestionListPage } from './suggestion-list/suggestion-list.page';
+import { ToastService } from '../../../../../services/toast/toast.service';
 
 interface ViewItem {
   _id: string;
@@ -37,18 +37,22 @@ export class TaskGroupPage implements OnInit {
               private storage: Storage,
               private actionSheetController: ActionSheetController,
               private confirmationService: ConfirmationService,
+              private toastService: ToastService,
               private http: HttpClient) { }
 
   async ngOnInit() {
     this.isStudent = await this.userService.isStudent();
     const turma = await this.storage.get('activeClass');
     this.students = turma.collaborations;
+    this.getStudents();
+  }
 
+  getStudents() {
+    this.loading = true;
     this.http.get(`${api}/task/${this.task._id}`).subscribe((res: any[]) => {
       this.groups = res.filter(g => g.accepted);
       this.load();
     });
-
   }
 
   async load() {
@@ -60,7 +64,7 @@ export class TaskGroupPage implements OnInit {
     this.groups.forEach(g => {
       const collabs: Collaboration[] = g.usersId.map(id => students.find(s => s.userId === id));
       const item: ViewItem = {
-        ...createEntity(),
+        _id: g._id,
         group: collabs
       };
       this.items.push(item);
@@ -98,6 +102,9 @@ export class TaskGroupPage implements OnInit {
 
   removeGroup(group: ViewItem) {
     this.items = this.items.filter(g => g._id !== group._id);
+    this.groups = this.groups.filter(g => g._id !== group._id);
+    this.http.delete(`${api}/task/${this.task._id}/rejectGroup/${group._id}`).subscribe();
+    this.toastService.showToast('Grupo removido', 'success');
   }
 
   close() {
@@ -158,6 +165,7 @@ export class TaskGroupPage implements OnInit {
     await modal.present();
     await modal.onWillDismiss().then((res) => {
       console.log('DISMISS');
+      this.getStudents();
     });
     return;
   }
@@ -188,7 +196,6 @@ export class TaskGroupPage implements OnInit {
       }
     });
     await this.http.post(`${api}/task/${this.task._id}/manyGroups`, this.groups.map(g => {
-      delete g.accepted;
       return g;
     })).toPromise();
     this.load();

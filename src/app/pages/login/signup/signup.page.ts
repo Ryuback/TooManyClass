@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../services/firebase.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +16,7 @@ export class SignupPage implements OnInit {
 
   constructor(private fb: FormBuilder,
               private firebaseService: FirebaseService,
+              private toastController: ToastController,
               public router: Router) {
     console.log('#SignupPage.constructor');
   }
@@ -39,7 +41,21 @@ export class SignupPage implements OnInit {
     if (this.form.valid) {
       this.firebaseService.login(this.form.value.email, this.form.value.passwd).then(() => {
         this.router.navigateByUrl('dashboard');
+      }).catch(async () => {
+        const toast = await this.toastController.create({
+          message: 'Algum campo está incorreto.',
+          position: 'top',
+          duration: 2000
+        });
+        toast.present();
       });
+    } else {
+      const toast = await this.toastController.create({
+        message: 'Nenhum campo deve estar vazio ou incorreto.',
+        position: 'top',
+        duration: 2000
+      });
+      toast.present();
     }
   }
 }

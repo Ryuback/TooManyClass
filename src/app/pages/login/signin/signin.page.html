@@ -1,10 +1,10 @@
 <ion-content>
   <div class="main-content"></div>
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" [formGroup]="form">
     <ion-grid>
       <ion-col>
         <div class="ion-text-center" style="margin-top: 100px">
-          <img src="../../../assets/images/logo.svg" height="58" width="58" alt="">
+          <img alt="" height="58" src="../../../assets/images/logo.svg" width="58">
         </div>
       </ion-col>
       <ion-col>
@@ -38,14 +38,14 @@
         <ion-item>
           <ion-label position="floating">
             <ion-icon name="key-outline"></ion-icon>
-            Password
+            Senha
           </ion-label>
           <ion-input formControlName="passwd" type="password"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
-        <ion-button type="submit" expand="full" shape="round" class="signin-button">
-          Create Account
+        <ion-button class="signin-button" expand="full" shape="round" type="submit">
+          Criar conta
         </ion-button>
       </ion-col>
     </ion-grid>

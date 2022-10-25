@@ -102,6 +102,7 @@ export class DashboardPage {
     await popover.present();
 
     await popover.onDidDismiss();
+    await this.load();
     console.log('onDidDismiss resolved with role');
   }
 

@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { UserService } from './user/user.service';
 import { HttpClient } from '@angular/common/http';
 import { api } from '../../environments/environment';
 import { User } from '../shared/model/user.model';
+import { FirebaseApp } from '@angular/fire/compat';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class FirebaseService {
   constructor(private google: GooglePlus,
               private firebaseAuthentication: FirebaseAuthentication,
               private userService: UserService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              @Inject(FirebaseApp) private firebaseApp: any) {
     console.log('#FirebaseService.constructor');
   }
 
@@ -40,6 +42,12 @@ export class FirebaseService {
         givenName
       }).toPromise();
     return this.userService.setCurrentUser(user);
+  }
+
+  async updatePasswd() {
+    const user = await this.userService.getCurrentUser();
+    const auth = this.firebaseApp.auth();
+    auth.sendPasswordResetEmail(user.email);
   }
 
   async login(email: string, password: string): Promise<any> {

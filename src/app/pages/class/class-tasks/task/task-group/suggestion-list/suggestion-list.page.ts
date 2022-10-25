@@ -51,7 +51,7 @@ export class SuggestionListPage implements OnInit {
     this.students = turma.collaborations;
 
     this.suggestions.forEach(g => {
-      const collabs: Collaboration[] = g.usersId.map(id => students.find(s => s.userId === id));
+      const collabs: Collaboration[] = g.usersId?.map(id => students.find(s => s.userId === id));
       const item: ViewItem = {
         _id: g._id,
         group: collabs

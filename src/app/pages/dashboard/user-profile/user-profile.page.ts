@@ -1,28 +1,30 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../shared/model/user.model';
+import { ToastService } from '../../../services/toast/toast.service';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.page.html',
-  styleUrls: ['./user-profile.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./user-profile.page.scss']
 })
-export class UserProfilePage {
+export class UserProfilePage implements OnInit {
 
   user: User;
 
   constructor(private userService: UserService,
-              private cdr: ChangeDetectorRef) { }
+              private toastService: ToastService,
+              private firebaseService: FirebaseService) {
 
-  ionViewWillEnter() {
-    this.load().then();
   }
 
-  async load() {
+  async ngOnInit() {
     this.user = await this.userService.getCurrentUserDB();
-    console.log(this.user);
-    this.cdr.markForCheck();
   }
 
+  submit() {
+    this.firebaseService.updatePasswd();
+    this.toastService.showToast('Email de redefinição enviado', 'success');
+  }
 }

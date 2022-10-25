@@ -11,7 +11,7 @@
 
 <ion-content>
   <div class="profile">
-    <ng-multiavatar [seed]="student.givenName" [hasBackground]="true"></ng-multiavatar>
+    <ng-multiavatar [hasBackground]="true" [seed]="student.givenName"></ng-multiavatar>
     <ion-title> {{ student.fullName }}</ion-title>
   </div>
 
@@ -19,23 +19,23 @@
     <ion-row>
       <ion-col *ngFor="let quality of student.qualities" size="4">
         <ion-list lines="none">
-          <ion-item class="ion-text-center" (click)="addQuality(quality.name)">
+          <ion-item (click)="addQuality(quality.name)" class="ion-text-center">
             <ion-label>
-              <img *ngIf="quality.name === 'helpingOthers'" src="../../../../assets/icon/heart-svgrepo-com.svg" alt=""
+              <img *ngIf="quality.name === 'helpingOthers'" alt="" src="../../../../assets/icon/heart-svgrepo-com.svg"
                    style="max-width: 60%">
-              <img *ngIf="quality.name === 'onTask'" src="../../../../assets/icon/like-svgrepo-com.svg" alt=""
+              <img *ngIf="quality.name === 'onTask'" alt="" src="../../../../assets/icon/like-svgrepo-com.svg"
                    style="max-width: 60%">
-              <img *ngIf="quality.name === 'participating'" src="../../../../assets/icon/flash-svgrepo-com.svg" alt=""
+              <img *ngIf="quality.name === 'participating'" alt="" src="../../../../assets/icon/flash-svgrepo-com.svg"
                    style="max-width: 60%">
-              <img *ngIf="quality.name === 'teamWork'" src="../../../../assets/icon/teamwork-svgrepo-com.svg" alt=""
+              <img *ngIf="quality.name === 'teamWork'" alt="" src="../../../../assets/icon/teamwork-svgrepo-com.svg"
                    style="max-width: 60%">
             </ion-label>
             <ion-badge slot="end">{{ quality.count }}</ion-badge>
           </ion-item>
-          <div class="skill" *ngIf="quality.name === 'helpingOthers'"> Ajuda os demais</div>
-          <div class="skill" *ngIf="quality.name === 'onTask'"> Faz atividades</div>
-          <div class="skill" *ngIf="quality.name === 'participating'"> Participativo</div>
-          <div class="skill" *ngIf="quality.name === 'teamWork'"> Trabalha em grupo</div>
+          <div *ngIf="quality.name === 'helpingOthers'" class="skill"> Ajuda os demais</div>
+          <div *ngIf="quality.name === 'onTask'" class="skill"> Faz atividades</div>
+          <div *ngIf="quality.name === 'participating'" class="skill"> Participativo</div>
+          <div *ngIf="quality.name === 'teamWork'" class="skill"> Trabalha em grupo</div>
         </ion-list>
       </ion-col>
     </ion-row>
@@ -43,7 +43,9 @@
 </ion-content>
 
 <ion-footer>
-  <ion-title>
-    Faltas: {{student.absent}}
-  </ion-title>
+  <ion-toolbar>
+    <ion-title>
+      Faltas: {{student.absent}}
+    </ion-title>
+  </ion-toolbar>
 </ion-footer>
